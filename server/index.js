@@ -12,6 +12,10 @@ const app = express();
 // Connect DB
 connectDB();
 
+// MIDDLEWARES
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
+app.use(express.json());
+
 // Route
 app.use(
   "/graphql",
