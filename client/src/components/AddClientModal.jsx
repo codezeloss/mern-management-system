@@ -1,13 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { useMutation } from "@apollo/client";
 import { useState } from "react";
+import { ADD_CLIENT } from "../mutations/clientMutations";
 
 // ** MUI imports
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
+import { GET_CLIENTS } from "../queries/clientQueries";
 
 const style = {
   position: "absolute",
@@ -29,8 +30,36 @@ const AddClientModal = () => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
 
+  const [addClient] = useMutation(ADD_CLIENT, {
+    variables: { name, email, phone },
+    update(cache, { data: { addClient } }) {
+      const { clients } = cache.readQuery({
+        query: GET_CLIENTS,
+      });
+      cache.writeQuery({
+        query: GET_CLIENTS,
+        data: { clients: [...clients, addClient] },
+      });
+    },
+  });
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    if (name === "" || email === "" || phone === "") {
+      return alert("Please fill in all field!");
+    }
+
+    addClient(name, email, phone);
+
+    setOpen(false);
+    setName("");
+    setEmail("");
+    setPhone("");
+  };
 
   return (
     <div>
@@ -88,8 +117,9 @@ const AddClientModal = () => {
               onChange={(e) => setPhone(e.target.value)}
             />
             <button
-              onClick={() => {}}
               className="px-4 py-2 text-white font-bold bg-blue-600 rounded-md text-sm"
+              data-bs-dismiss="modal"
+              onClick={onSubmit}
             >
               Submit
             </button>
@@ -101,38 +131,3 @@ const AddClientModal = () => {
 };
 
 export default AddClientModal;
-
-{
-  /* <form>
-              <label htmlFor="name">
-                <input
-                  className=""
-                  placeholder="Name"
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </label>
-              <label htmlFor="email">
-                <input
-                  className=""
-                  placeholder="Email"
-                  type="text"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </label>
-              <label htmlFor="phone">
-                <input
-                  className=""
-                  placeholder="Phone"
-                  type="text"
-                  id="phone"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-              </label>
-            </form> */
-}
