@@ -65,7 +65,7 @@ const AddClientModal = () => {
     <div>
       <button
         onClick={handleOpen}
-        className="px-4 py-2 text-white font-bold bg-blue-600 rounded-md text-sm my-4"
+        className="px-4 py-2 text-white font-bold bg-blue-600 rounded-md text-sm mt-4"
       >
         Add Client
       </button>

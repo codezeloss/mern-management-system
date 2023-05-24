@@ -28,5 +28,5 @@ app.use(
 // Listen to server
 const PORT = 5000 || Number.parseInt(process.env.PORT);
 app.listen(PORT, () => {
-  console.log("::: 🚀 Server has started :::".yellow.bold);
+  console.log("::: 🚀 Server has started :::".cyan.bold);
 });

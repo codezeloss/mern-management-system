@@ -37,26 +37,33 @@ const Clients = () => {
 
   return (
     <>
-      {!loading && !error && (
-        <TableContainer component={Paper}>
-          <Table sx={{ width: "100%" }} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Name</StyledTableCell>
-                <StyledTableCell align="left">Email</StyledTableCell>
-                <StyledTableCell align="left">Phone</StyledTableCell>
-                <StyledTableCell align="left"></StyledTableCell>
-              </TableRow>
-            </TableHead>
+      <h1 className="text-2xl font-bold my-4">Clients</h1>
+      <div>
+        {!loading && !error && (
+          <TableContainer component={Paper}>
+            <Table sx={{ width: "100%" }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Name</StyledTableCell>
+                  <StyledTableCell align="left">Email</StyledTableCell>
+                  <StyledTableCell align="left">Phone</StyledTableCell>
+                  <StyledTableCell align="left"></StyledTableCell>
+                </TableRow>
+              </TableHead>
 
-            <TableBody>
-              {data.clients.map((client) => (
-                <ClientRow key={client.id} client={client} refetch={refetch} />
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
+              <TableBody>
+                {data.clients.map((client) => (
+                  <ClientRow
+                    key={client.id}
+                    client={client}
+                    refetch={refetch}
+                  />
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+      </div>
     </>
   );
 };
