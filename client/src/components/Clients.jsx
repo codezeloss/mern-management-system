@@ -13,6 +13,7 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
+import { GET_PROJECTS } from "../queries/projectQueries";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -25,7 +26,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const Clients = () => {
-  const { loading, error, data, refetch } = useQuery(GET_CLIENTS);
+  const { loading, error, data, refetchClients } = useQuery(GET_CLIENTS);
+  const { refetchProjects } = useQuery(GET_PROJECTS);
 
   if (loading) {
     return <Spinner />;
@@ -56,7 +58,8 @@ const Clients = () => {
                   <ClientRow
                     key={client.id}
                     client={client}
-                    refetch={refetch}
+                    refetchClients={refetchClients}
+                    refetchProjects={refetchProjects}
                   />
                 ))}
               </TableBody>

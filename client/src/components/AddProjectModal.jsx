@@ -3,6 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { ADD_PROJECT } from "../mutations/projectMutations";
 import { GET_PROJECTS } from "../queries/projectQueries";
+import { GET_CLIENTS } from "../queries/clientQueries";
 
 // ** MUI imports
 import Box from "@mui/material/Box";
@@ -13,7 +14,6 @@ import { TextareaAutosize } from "@mui/material";
 import Select, { selectClasses } from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
-import { GET_CLIENTS } from "../queries/clientQueries";
 
 const style = {
   position: "absolute",

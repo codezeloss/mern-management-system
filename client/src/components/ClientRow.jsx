@@ -25,10 +25,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const ClientRow = ({ client, refetch }) => {
-  const [deleteClient] = useMutation(DELETE_CLIENT, {
-    variables: { id: client.id },
-  });
+const ClientRow = ({ client, refetchClients, refetchProjects }) => {
+  const [deleteClient] = useMutation(DELETE_CLIENT, { variables: { id: client.id } });
 
   return (
     <StyledTableRow key={client.id}>
@@ -39,10 +37,11 @@ const ClientRow = ({ client, refetch }) => {
       <StyledTableCell align="left">{client.phone}</StyledTableCell>
       <StyledTableCell align="right">
         <button
-          className="bg-red-600 text-white p-2"
+          className="bg-red-600 text-white text-xs rounded-md font-bold p-2"
           onClick={() => {
             deleteClient();
-            refetch();
+            refetchClients();
+            refetchProjects();
           }}
         >
           Delete
