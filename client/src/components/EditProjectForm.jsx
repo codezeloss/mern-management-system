@@ -51,7 +51,7 @@ const EditProjectForm = ({ project }) => {
 
     setName("");
     setDescription("");
-    setStatus("");
+    setStatus("new");
   }
 
   return (

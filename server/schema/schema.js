@@ -11,6 +11,8 @@ const {
   GraphQLSchema,
 } = require("graphql");
 
+// **
+// ** Types
 // Project Type (Schema)
 const ProjectType = new GraphQLObjectType({
   name: "ProjectType",
@@ -39,7 +41,8 @@ const ClientType = new GraphQLObjectType({
   }),
 });
 
-// Queries
+// **
+// ** Queries
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
   fields: {
@@ -76,7 +79,8 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
-// Mutations
+// **
+// ** Mutations
 const mutations = new GraphQLObjectType({
   name: "Mutations",
   fields: {

@@ -2,9 +2,10 @@
 import { useQuery } from "@apollo/client";
 import ClientRow from "./ClientRow";
 import { GET_CLIENTS } from "../queries/clientQueries";
+import { GET_PROJECTS } from "../queries/projectQueries";
 import Spinner from "./Spinner";
 
-// **
+// ** MUI Imports
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
@@ -13,7 +14,6 @@ import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import Paper from "@mui/material/Paper";
-import { GET_PROJECTS } from "../queries/projectQueries";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -26,8 +26,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const Clients = () => {
-  const { loading, error, data, refetchClients } = useQuery(GET_CLIENTS);
-  const { refetchProjects } = useQuery(GET_PROJECTS);
+  const { loading, error, data, refetch: refetchClients } = useQuery(GET_CLIENTS);
+  const { refetch: refetchProjects } = useQuery(GET_PROJECTS);
 
   if (loading) {
     return <Spinner />;
